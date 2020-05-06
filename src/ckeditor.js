@@ -29,6 +29,9 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import PageBreak from '@ckeditor/ckeditor5-page-break/src/pagebreak';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -56,7 +59,10 @@ ClassicEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TextTransformation,
+	Alignment,
+	Font,
+	PageBreak
 ];
 
 // Editor configuration.
@@ -71,6 +77,12 @@ ClassicEditor.defaultConfig = {
 			'bulletedList',
 			'numberedList',
 			'|',
+			'fontSize',
+			'fontFamily',
+			'fontColor',
+			'fontBackgroundColor',
+			'|',
+			'alignment',
 			'indent',
 			'outdent',
 			'|',
@@ -78,6 +90,7 @@ ClassicEditor.defaultConfig = {
 			'blockQuote',
 			'insertTable',
 			'mediaEmbed',
+			'pageBreak',
 			'undo',
 			'redo'
 		]
@@ -97,6 +110,135 @@ ClassicEditor.defaultConfig = {
 			'mergeTableCells'
 		]
 	},
-	// This value must be kept in sync with the language defined in webpack.config.js.
-	language: 'en'
+	fontColor: {
+		colors: [
+			{
+				color: 'hsl(0, 0%, 0%)',
+				label: 'Black'
+			},
+			{
+				color: 'hsl(0, 0%, 30%)',
+				label: 'Dim grey'
+			},
+			{
+				color: 'hsl(0, 0%, 60%)',
+				label: 'Grey'
+			},
+			{
+				color: 'hsl(0, 0%, 90%)',
+				label: 'Light grey'
+			},
+			{
+				color: 'hsl(0, 0%, 100%)',
+				label: 'White',
+				hasBorder: true
+			},
+			{
+				color: 'hsl(0, 100%, 68%)',
+				label: 'Red'
+			},
+			{
+				color: 'hsl(22, 100%, 51%)',
+				label: 'Orange'
+			},
+			{
+				color: 'hsl(41, 98%, 68%)',
+				label: 'Yellow'
+			},
+			{
+				color: 'hsl(133, 90%, 76%)',
+				label: 'Light green'
+			},
+			{
+				color: 'hsl(139, 74%, 51%)',
+				label: 'Green'
+			},
+			{
+				color: 'hsl(0, 0%, 0%)',
+				label: 'Aquamarine'
+			},
+			{
+				color: 'hsl(180, 75%, 60%)',
+				label: 'Turquoise'
+			},
+			{
+				color: 'hsl(210, 86%, 83%)',
+				label: 'Light blue'
+			},
+			{
+				color: 'hsl(210, 76%, 56%)',
+				label: 'Blue'
+			},
+			{
+				color: 'hsl(252, 100%, 69%)',
+				label: 'Purple'
+			}
+		]
+	},
+	fontBackgroundColor: {
+		colors: [
+			{
+				color: 'hsl(0, 0%, 0%)',
+				label: 'Black'
+			},
+			{
+				color: 'hsl(0, 0%, 30%)',
+				label: 'Dim grey'
+			},
+			{
+				color: 'hsl(0, 0%, 60%)',
+				label: 'Grey'
+			},
+			{
+				color: 'hsl(0, 0%, 90%)',
+				label: 'Light grey'
+			},
+			{
+				color: 'hsl(0, 0%, 100%)',
+				label: 'White',
+				hasBorder: true
+			},
+			{
+				color: 'hsl(0, 100%, 68%)',
+				label: 'Red'
+			},
+			{
+				color: 'hsl(22, 100%, 51%)',
+				label: 'Orange'
+			},
+			{
+				color: 'hsl(41, 98%, 68%)',
+				label: 'Yellow'
+			},
+			{
+				color: 'hsl(133, 90%, 76%)',
+				label: 'Light green'
+			},
+			{
+				color: 'hsl(139, 74%, 51%)',
+				label: 'Green'
+			},
+			{
+				color: 'hsl(0, 0%, 0%)',
+				label: 'Aquamarine'
+			},
+			{
+				color: 'hsl(180, 75%, 60%)',
+				label: 'Turquoise'
+			},
+			{
+				color: 'hsl(210, 86%, 83%)',
+				label: 'Light blue'
+			},
+			{
+				color: 'hsl(210, 76%, 56%)',
+				label: 'Blue'
+			},
+			{
+				color: 'hsl(252, 100%, 69%)',
+				label: 'Purple'
+			}
+		]
+	},
+	language: 'pt-br'
 };
