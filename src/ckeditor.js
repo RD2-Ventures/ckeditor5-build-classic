@@ -154,7 +154,7 @@ ClassicEditor.defaultConfig = {
 				label: 'Green'
 			},
 			{
-				color: 'hsl(0, 0%, 0%)',
+				color: 'hsl(163, 61%, 57%)',
 				label: 'Aquamarine'
 			},
 			{
@@ -219,7 +219,7 @@ ClassicEditor.defaultConfig = {
 				label: 'Green'
 			},
 			{
-				color: 'hsl(0, 0%, 0%)',
+				color: 'hsl(163, 61%, 57%)',
 				label: 'Aquamarine'
 			},
 			{
