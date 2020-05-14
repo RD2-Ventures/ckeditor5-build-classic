@@ -36,8 +36,8 @@ import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import HorizontalLine from "@ckeditor/ckeditor5-horizontal-line/src/horizontalline";
 import Highlight from "@ckeditor/ckeditor5-highlight/src/highlight";
 
-export class ClassicEditor extends ClassicEditorBase {}
-export class InlineEditor extends InlineEditorBase {}
+class ClassicEditor extends ClassicEditorBase {}
+class InlineEditor extends InlineEditorBase {}
 
 const plugins = [
 	Essentials,
@@ -251,4 +251,4 @@ InlineEditor.builtinPlugins = plugins;
 ClassicEditor.defaultConfig = config;
 InlineEditor.defaultConfig = config;
 
-export default ClassicEditor;
+export default { ClassicEditor, InlineEditor };
