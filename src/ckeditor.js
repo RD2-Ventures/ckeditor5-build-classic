@@ -23,6 +23,7 @@ import ImageToolbar from "@ckeditor/ckeditor5-image/src/imagetoolbar";
 import ImageUpload from "@ckeditor/ckeditor5-image/src/imageupload";
 import Indent from "@ckeditor/ckeditor5-indent/src/indent";
 import Link from "@ckeditor/ckeditor5-link/src/link";
+import AutoLink from "@ckeditor/ckeditor5-link/src/autolink";
 import List from "@ckeditor/ckeditor5-list/src/list";
 import MediaEmbed from "@ckeditor/ckeditor5-media-embed/src/mediaembed";
 import Paragraph from "@ckeditor/ckeditor5-paragraph/src/paragraph";
@@ -67,6 +68,7 @@ const plugins = [
 	Font,
 	PageBreak,
 	HorizontalLine,
+	AutoLink,
 ];
 
 const config = {
