@@ -36,6 +36,7 @@ import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
 import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import HorizontalLine from "@ckeditor/ckeditor5-horizontal-line/src/horizontalline";
 import Highlight from "@ckeditor/ckeditor5-highlight/src/highlight";
+import Mention from "@ckeditor/ckeditor5-mention/src/mention";
 
 class ClassicEditor extends ClassicEditorBase {}
 class InlineEditor extends InlineEditorBase {}
@@ -69,6 +70,7 @@ const plugins = [
 	PageBreak,
 	HorizontalLine,
 	AutoLink,
+	Mention,
 ];
 
 const config = {
