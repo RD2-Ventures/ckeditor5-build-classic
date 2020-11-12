@@ -6,7 +6,7 @@
 // The editor creator to use.
 import ClassicEditorBase from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 import InlineEditorBase from "@ckeditor/ckeditor5-editor-inline/src/inlineeditor";
-import BalloonEditorBase from "@ckeditor/ckeditor5-build-balloon-block";
+import BalloonEditorBase from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 
 import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";
 import UploadAdapter from "@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter";
@@ -36,8 +36,8 @@ import Font from "@ckeditor/ckeditor5-font/src/font";
 import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
 import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import HorizontalLine from "@ckeditor/ckeditor5-horizontal-line/src/horizontalline";
-import Highlight from "@ckeditor/ckeditor5-highlight/src/highlight";
 import Mention from "@ckeditor/ckeditor5-mention/src/mention";
+import BlockToolbar from "@ckeditor/ckeditor5-ui/src/toolbar/block/blocktoolbar";
 
 class ClassicEditor extends ClassicEditorBase {}
 class InlineEditor extends InlineEditorBase {}
@@ -252,11 +252,25 @@ const config = {
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = plugins;
 InlineEditor.builtinPlugins = plugins;
-BalloonEditor.builtinPlugins = plugins;
+BalloonEditor.builtinPlugins = [...plugins, BlockToolbar];
 
 // Editor configuration.
 ClassicEditor.defaultConfig = config;
 InlineEditor.defaultConfig = config;
-BalloonEditor.defaultConfig = config;
+BalloonEditor.defaultConfig = {
+	...config,
+	blockToolbar: [
+		"paragraph",
+		"heading1",
+		"heading2",
+		"heading3",
+		"|",
+		"bulletedList",
+		"numberedList",
+		"|",
+		"blockQuote",
+		"imageUpload",
+	],
+};
 
 export default { ClassicEditor, InlineEditor, BalloonEditor };

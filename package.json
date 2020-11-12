@@ -45,7 +45,7 @@
     "@ckeditor/ckeditor5-mention": "^22.0.0",
     "@ckeditor/ckeditor5-list": "^22.0.0",
     "@ckeditor/ckeditor5-editor-inline": "^22.0.0",
-    "@ckeditor/ckeditor5-build-balloon-block": "^22.0.0",
+    "@ckeditor/ckeditor5-editor-balloon": "^22.0.0",
     "@ckeditor/ckeditor5-media-embed": "^22.0.0",
     "@ckeditor/ckeditor5-paragraph": "^22.0.0",
     "@ckeditor/ckeditor5-paste-from-office": "^22.0.0",
