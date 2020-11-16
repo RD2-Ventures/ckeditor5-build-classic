@@ -4,7 +4,6 @@
  */
 
 // The editor creator to use.
-import ClassicEditorBase from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
 import InlineEditorBase from "@ckeditor/ckeditor5-editor-inline/src/inlineeditor";
 import BalloonEditorBase from "@ckeditor/ckeditor5-editor-balloon/src/ballooneditor";
 
@@ -33,13 +32,13 @@ import Table from "@ckeditor/ckeditor5-table/src/table";
 import TableToolbar from "@ckeditor/ckeditor5-table/src/tabletoolbar";
 import TextTransformation from "@ckeditor/ckeditor5-typing/src/texttransformation";
 import Font from "@ckeditor/ckeditor5-font/src/font";
-import PageBreak from "@ckeditor/ckeditor5-page-break/src/pagebreak";
 import Alignment from "@ckeditor/ckeditor5-alignment/src/alignment";
 import HorizontalLine from "@ckeditor/ckeditor5-horizontal-line/src/horizontalline";
 import Mention from "@ckeditor/ckeditor5-mention/src/mention";
 import BlockToolbar from "@ckeditor/ckeditor5-ui/src/toolbar/block/blocktoolbar";
+import HeadingButtonsUI from "@ckeditor/ckeditor5-heading/src/headingbuttonsui";
+import ParagraphButtonUI from "@ckeditor/ckeditor5-paragraph/src/paragraphbuttonui";
 
-class ClassicEditor extends ClassicEditorBase {}
 class InlineEditor extends InlineEditorBase {}
 class BalloonEditor extends BalloonEditorBase {}
 
@@ -69,7 +68,6 @@ const plugins = [
 	TextTransformation,
 	Alignment,
 	Font,
-	PageBreak,
 	HorizontalLine,
 	AutoLink,
 	Mention,
@@ -100,7 +98,6 @@ const config = {
 			"blockQuote",
 			"insertTable",
 			"mediaEmbed",
-			"pageBreak",
 			"undo",
 			"redo",
 		],
@@ -250,19 +247,51 @@ const config = {
 };
 
 // Plugins to include in the build.
-ClassicEditor.builtinPlugins = plugins;
 InlineEditor.builtinPlugins = plugins;
-BalloonEditor.builtinPlugins = [...plugins, BlockToolbar];
+BalloonEditor.builtinPlugins = [
+	...plugins,
+	BlockToolbar,
+	HeadingButtonsUI,
+	ParagraphButtonUI,
+];
 
 // Editor configuration.
-ClassicEditor.defaultConfig = config;
 InlineEditor.defaultConfig = config;
 BalloonEditor.defaultConfig = {
 	...config,
-	toolbar: ["bold", "italic", "link", "undo", "redo"],
+	toolbar: [
+		"heading",
+		"|",
+		"bold",
+		"italic",
+		"link",
+		"alignment",
+		"|",
+		"fontColor",
+		"fontBackgroundColor",
+		"|",
+		"undo",
+		"redo",
+	],
 	blockToolbar: {
-		items: ["bulletedList", "numberedList"],
+		items: [
+			"paragraph",
+			"heading1",
+			"heading2",
+			"heading3",
+			"|",
+			"bulletedList",
+			"numberedList",
+			"|",
+			"imageUpload",
+			"blockQuote",
+			"insertTable",
+			"mediaEmbed",
+			"|",
+			"undo",
+			"redo",
+		],
 	},
 };
 
-export default { ClassicEditor, InlineEditor, BalloonEditor };
+export default { InlineEditor, BalloonEditor };
