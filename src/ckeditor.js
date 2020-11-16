@@ -261,18 +261,7 @@ BalloonEditor.defaultConfig = {
 	...config,
 	toolbar: [],
 	blockToolbar: {
-		items: [
-			"paragraph",
-			"heading1",
-			"heading2",
-			"heading3",
-			"|",
-			"bulletedList",
-			"numberedList",
-			"|",
-			"blockQuote",
-			"imageUpload",
-		],
+		items: ["imageUpload"],
 	},
 };
 
