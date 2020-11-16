@@ -259,18 +259,20 @@ ClassicEditor.defaultConfig = config;
 InlineEditor.defaultConfig = config;
 BalloonEditor.defaultConfig = {
 	...config,
-	blockToolbar: [
-		"paragraph",
-		"heading1",
-		"heading2",
-		"heading3",
-		"|",
-		"bulletedList",
-		"numberedList",
-		"|",
-		"blockQuote",
-		"imageUpload",
-	],
+	blockToolbar: {
+		items: [
+			"paragraph",
+			"heading1",
+			"heading2",
+			"heading3",
+			"|",
+			"bulletedList",
+			"numberedList",
+			"|",
+			"blockQuote",
+			"imageUpload",
+		],
+	},
 };
 
 export default { ClassicEditor, InlineEditor, BalloonEditor };
