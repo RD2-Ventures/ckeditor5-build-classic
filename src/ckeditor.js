@@ -261,7 +261,7 @@ BalloonEditor.defaultConfig = {
 	...config,
 	toolbar: [],
 	blockToolbar: {
-		items: ["imageUpload"],
+		items: [],
 	},
 };
 
