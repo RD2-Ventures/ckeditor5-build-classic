@@ -259,9 +259,9 @@ ClassicEditor.defaultConfig = config;
 InlineEditor.defaultConfig = config;
 BalloonEditor.defaultConfig = {
 	...config,
-	toolbar: [],
+	toolbar: ["bold", "italic", "link", "undo", "redo"],
 	blockToolbar: {
-		items: ["link"],
+		items: ["bulletedList", "numberedList"],
 	},
 };
 
