@@ -402,6 +402,8 @@ export default class CardsConnectionUI extends Plugin {
 				);
 			});
 
+			this._hideUIAndRemoveMarkers();
+
 			// Retorna o foco para a view de edição, para que o usuário possa continuar escrevendo
 			editor.editing.view.focus();
 		});
