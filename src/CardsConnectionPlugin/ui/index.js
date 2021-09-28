@@ -65,20 +65,12 @@ export default class CardsConnectionUI extends Plugin {
 			this._cardconnectionsConfig.cardList === undefined &&
 			this._cardconnectionsConfig.getFilteredCards === undefined
 		) {
-			throw new CKEditorError(
-				"cardsconnectionconfig-no-card-list-source",
-				null,
-				{ config }
-			);
+			throw new Error("cardsconnectionconfig-no-card-list-source");
 		}
 
 		// Testa se a configuração possui uma função para construir o link de um card, em caso negativo um erro é disparado
 		if (this._cardconnectionsConfig.getCardLink === undefined) {
-			throw new CKEditorError(
-				"cardsconnectionconfig-no-card-link-callback",
-				null,
-				{ config }
-			);
+			throw new Error("cardsconnectionconfig-no-card-link-callback");
 		}
 
 		// Define uma função asíncrona para a requisição da lista de cards
