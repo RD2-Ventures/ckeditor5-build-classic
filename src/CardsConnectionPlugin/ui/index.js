@@ -39,6 +39,7 @@ export default class CardsConnectionUI extends Plugin {
 		config.define("cardconnections", {
 			cardList: undefined,
 			getFilteredCards: undefined,
+			getCardLink: undefined,
 		});
 		// Copia o campo cardconnections para uma variável interna do plugin, isso evita erros ao copiar funções da configuração
 		this._cardconnectionsConfig = this.editor.config.get("cardconnections");
@@ -71,6 +72,15 @@ export default class CardsConnectionUI extends Plugin {
 			);
 		}
 
+		// Testa se a configuração possui uma função para construir o link de um card, em caso negativo um erro é disparado
+		if (this._cardconnectionsConfig.getCardLink === undefined) {
+			throw new CKEditorError(
+				"cardsconnectionconfig-no-card-link-callback",
+				null,
+				{ config }
+			);
+		}
+
 		// Define uma função asíncrona para a requisição da lista de cards
 		this._getCardList = async (cardTitle) => {
 			console.log("CardsConnectionUI._getCardList()...");
@@ -84,7 +94,7 @@ export default class CardsConnectionUI extends Plugin {
 			}
 
 			// Se a configuração não possuir uma lista fixa, a função passada na configuração é chamada e aguardada
-			if (this._cardconnectionsConfig.cardList === undefined) {
+			if (this._cardconnectionsConfig.getFilteredCards !== undefined) {
 				try {
 					const response =
 						await this._cardconnectionsConfig.getFilteredCards(
@@ -92,9 +102,18 @@ export default class CardsConnectionUI extends Plugin {
 						);
 
 					// Em caso de sucesso a resposta da requisição é passada nos dados do evento de resposta da função
-					this.fire("CardsConnectionUI.getCardList:response", {
-						cardList: response,
-					});
+					if (this._cardconnectionsConfig.cardList === undefined) {
+						this.fire("CardsConnectionUI.getCardList:response", {
+							cardList: response,
+						});
+					} else {
+						this.fire("CardsConnectionUI.getCardList:response", {
+							cardList: [
+								...this._cardconnectionsConfig.cardList,
+								...response,
+							],
+						});
+					}
 				} catch (error) {
 					// Em caso de erro é disparado um evento de erro
 					this.fire("CardsConnectionUI.getCardList:error", { error });
@@ -288,9 +307,14 @@ export default class CardsConnectionUI extends Plugin {
 
 		const { cardList } = data;
 
+		const configCardList = cardList.map((card) => {
+			const link = this._cardconnectionsConfig.getCardLink(card);
+			return { ...card, link };
+		});
+
 		// A resposta é tratada apenas se o usuário ainda estiver escrevendo o título do card
 		if (isStillCompleting(editor)) {
-			config.set("cardconnections.cardList", cardList);
+			config.set("cardconnections.cardList", configCardList);
 
 			this._items.clear();
 
