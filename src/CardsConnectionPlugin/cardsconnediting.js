@@ -35,7 +35,6 @@ export default class CardsConnectionEditing extends Plugin {
 			isContent: true,
 			isSelectable: true,
 			isObject: true,
-			isLimit: true,
 			allowAttributesOf: "$text",
 			allowAttributes: ["cardtitle", "cardid", "cardlink", "carddeleted"],
 		});

@@ -31,7 +31,6 @@ export default class CardsConnectionUI extends Plugin {
 	}
 
 	init() {
-		console.log("CardsConnectionUI.init()...");
 		const editor = this.editor;
 		const config = editor.config;
 
@@ -79,8 +78,6 @@ export default class CardsConnectionUI extends Plugin {
 
 		// Define uma função asíncrona para a requisição da lista de cards
 		this._getCardList = async (cardTitle) => {
-			console.log("CardsConnectionUI._getCardList()...");
-
 			// Se o título estiver vazio a resposta da função é uma lista vazia
 			if (cardTitle === "") {
 				this.fire("CardsConnectionUI.getCardList:response", {
@@ -121,7 +118,6 @@ export default class CardsConnectionUI extends Plugin {
 				});
 			}
 
-			console.log("CardsConnectionUI._getCardList() ended.");
 			return;
 		};
 
@@ -135,8 +131,6 @@ export default class CardsConnectionUI extends Plugin {
 		this.on("CardsConnectionUI.getCardList:error", () =>
 			this._hideUIAndRemoveMarkers()
 		);
-
-		console.log("CardsConnectionUI.init() ended.");
 	}
 
 	destroy() {
@@ -162,7 +156,6 @@ export default class CardsConnectionUI extends Plugin {
 	 * @memberof CardsConnectionUI
 	 */
 	_createCardConnectionView() {
-		console.log("CardsConnectionPlugin._createCardConnectionView()...");
 		const editor = this.editor;
 		const locale = editor.locale;
 
@@ -183,8 +176,6 @@ export default class CardsConnectionUI extends Plugin {
 			return listItemView;
 		});
 
-		console.log("CardsConnectionPlugin._createCardConnectionView() ended.");
-
 		return cardConnectionView;
 	}
 
@@ -194,9 +185,6 @@ export default class CardsConnectionUI extends Plugin {
 	 * @memberof CardsConnectionUI
 	 */
 	_setupTextWatcherForMarkingModel() {
-		console.log(
-			"CardsConnectionPlugin._setupTextWatcherForMarkingModel()..."
-		);
 		const editor = this.editor;
 
 		const titleRegExp = createCardTitleRegExp();
@@ -265,10 +253,6 @@ export default class CardsConnectionUI extends Plugin {
 		watcher.on("unmatched", () => {
 			this._hideUIAndRemoveMarkers();
 		});
-
-		console.log(
-			"CardsConnectionPlugin._setupTextWatcherForMarkingModel() ended."
-		);
 	}
 
 	/**
@@ -297,7 +281,6 @@ export default class CardsConnectionUI extends Plugin {
 	 * @memberof CardsConnectionUI
 	 */
 	_handleGetCardListResponse(data) {
-		console.log("CardsConnectionPlugin._handleGetCardListResponse()...");
 		const editor = this.editor;
 		const config = editor.config;
 
@@ -329,10 +312,6 @@ export default class CardsConnectionUI extends Plugin {
 				this._hideUIAndRemoveMarkers();
 			}
 		}
-
-		console.log(
-			"CardsConnectionPlugin._handleGetCardListResponse() ended."
-		);
 	}
 
 	/**
@@ -342,8 +321,6 @@ export default class CardsConnectionUI extends Plugin {
 	 * @memberof CardsConnectionUI
 	 */
 	_showOrUpdateUI(marker) {
-		console.log("CardsConnectionPlugin._showOrUpdateUI()...");
-
 		if (this._isUIVisible) {
 			// Se a view estiver visícel já, o balão é atualizado.
 			this._balloon.updatePosition(
@@ -365,7 +342,6 @@ export default class CardsConnectionUI extends Plugin {
 			});
 
 			this._cardConnectionView.position = this._balloon.view.position;
-			console.log("CardsConnectionPlugin._showOrUpdateUI() ended.");
 		}
 	}
 
@@ -431,8 +407,6 @@ export default class CardsConnectionUI extends Plugin {
 
 	// Função para renderização do balão da UI, retirada do código do plugin mention
 	_getBalloonPanelPositionData(marker, preferredPosition) {
-		console.log("CardsConnectionPlugin._getBalloonPanelPositionData()...");
-
 		const editor = this.editor;
 		const editing = editor.editing;
 		const domConverter = editing.view.domConverter;
@@ -440,7 +414,6 @@ export default class CardsConnectionUI extends Plugin {
 
 		return {
 			target: () => {
-				console.log("_getBalloonPanelPositionData().target()...");
 				let modelRange = marker.getRange();
 
 				if (modelRange.start.root.rootName == "$graveyard") {
@@ -453,11 +426,9 @@ export default class CardsConnectionUI extends Plugin {
 					domConverter.viewRangeToDom(viewRange)
 				);
 
-				console.log("_getBalloonPanelPositionData().target() ended.");
 				return rangeRects.pop();
 			},
 			limiter: () => {
-				console.log("_getBalloonPanelPositionData().limiter()...");
 				const view = this.editor.editing.view;
 				const viewDocument = view.document;
 				const editableElement = viewDocument.selection.editableElement;
@@ -466,7 +437,6 @@ export default class CardsConnectionUI extends Plugin {
 					return view.domConverter.mapViewToDom(editableElement.root);
 				}
 
-				console.log("_getBalloonPanelPositionData().limiter() ended.");
 				return null;
 			},
 			positions: getBalloonPanelPositions(preferredPosition),
@@ -476,8 +446,6 @@ export default class CardsConnectionUI extends Plugin {
 
 // Função para renderização do balão da UI, retirada do código do plugin mention
 function getBalloonPanelPositions(preferredPosition) {
-	console.log("getBalloonPanelPositions()...");
-
 	const positions = {
 		caret_se: (targetRect) => {
 			return {
@@ -513,11 +481,8 @@ function getBalloonPanelPositions(preferredPosition) {
 	};
 
 	if (Object.prototype.hasOwnProperty.call(positions, preferredPosition)) {
-		console.log("getBalloonPanelPositions() RETURNING PREFERRED POSITION");
 		return [positions[preferredPosition]];
 	}
-
-	console.log("getBalloonPanelPositions() ended.");
 
 	return [
 		positions.caret_se,
