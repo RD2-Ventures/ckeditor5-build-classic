@@ -269,9 +269,10 @@ export default class CardsConnectionUI extends Plugin {
 		);
 
 		// Quando o sentinela encontrar o padrão no texto, o comando é executado
-		watcher.on("matched", () =>
-			editor.execute("cardconnection", { editor })
-		);
+		watcher.on("matched", () => {
+			this._hideUIAndRemoveMarkers();
+			editor.execute("cardconnection", { editor });
+		});
 	}
 
 	/**
@@ -344,7 +345,6 @@ export default class CardsConnectionUI extends Plugin {
 			});
 
 			this._cardConnectionView.position = this._balloon.view.position;
-			// this._mentionsView.selectFirst();
 			console.log("CardsConnectionPlugin._showOrUpdateUI() ended.");
 		}
 	}
@@ -401,8 +401,6 @@ export default class CardsConnectionUI extends Plugin {
 					writer.createPositionAt(selection.focus, "end")
 				);
 			});
-
-			this._hideUIAndRemoveMarkers();
 
 			// Retorna o foco para a view de edição, para que o usuário possa continuar escrevendo
 			editor.editing.view.focus();
