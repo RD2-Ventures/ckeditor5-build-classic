@@ -40,6 +40,7 @@ export default class CardsConnectionUI extends Plugin {
 			cardList: undefined,
 			getFilteredCards: undefined,
 			getCardLink: undefined,
+			readOnly: undefined,
 		});
 		// Copia o campo cardconnections para uma variável interna do plugin, isso evita erros ao copiar funções da configuração
 		this._cardconnectionsConfig = this.editor.config.get("cardconnections");
@@ -69,7 +70,10 @@ export default class CardsConnectionUI extends Plugin {
 		}
 
 		// Testa se a configuração possui uma função para construir o link de um card, em caso negativo um erro é disparado
-		if (this._cardconnectionsConfig.getCardLink === undefined) {
+		if (
+			this._cardconnectionsConfig.getCardLink === undefined &&
+			!this._cardconnectionsConfig.readOnly
+		) {
 			throw new Error("cardsconnectionconfig-no-card-link-callback");
 		}
 
