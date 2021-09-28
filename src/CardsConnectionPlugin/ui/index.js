@@ -118,7 +118,7 @@ export default class CardsConnectionUI extends Plugin {
 
 		// No caso de erro o balão da UI é fechado
 		this.on("CardsConnectionUI.getCardList:error", () =>
-			this._hideUIAndRemoveMarker()
+			this._hideUIAndRemoveMarkers()
 		);
 
 		console.log("CardsConnectionUI.init() ended.");
