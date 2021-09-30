@@ -100,7 +100,13 @@ export default class CardsConnectionEditing extends Plugin {
 				return;
 
 			// Marcamos que já tratamos o elemento <a> que estamos explorando atualmente
-			conversionApi.consumable.consume(viewAnchor, { name: true });
+			// conversionApi.consumable.consume(viewAnchor, { name: true });
+			conversionApi.consumable.consume(viewAnchor, {
+				// attributes: ["name", "cardid", "cardtitle", "cardlink"],
+				attributes: ["name"],
+				classes: ["cardconnection"],
+			});
+
 			// Atualizamos o resultado da conversão
 			conversionApi.updateConversionResult(modelElement, data);
 		}
@@ -150,7 +156,7 @@ export default class CardsConnectionEditing extends Plugin {
 			console.log("cardlink: ", cardlink);
 
 			// Procura o card mencionado na lista de cards da configuração
-			const card = config
+			const foundCard = config
 				.get("cardconnections.cardList")
 				.find((card) => card.id === cardid);
 
@@ -162,15 +168,19 @@ export default class CardsConnectionEditing extends Plugin {
 					{
 						class: "cardconnection",
 						cardid,
-						cardtitle: card !== undefined ? card.title : cardtitle,
-						href: card !== undefined ? card.link : cardlink,
+						cardtitle:
+							foundCard !== undefined
+								? foundCard.title
+								: cardtitle,
+						href:
+							foundCard !== undefined ? foundCard.link : cardlink,
 						target: "_blank",
 						rel: "noopener",
 					},
 					function (domElement) {
 						const innerText =
-							card !== undefined
-								? card.title
+							foundCard !== undefined
+								? foundCard.title
 								: pipeline === "editing"
 								? `🆕 ${cardtitle}`
 								: cardtitle;
@@ -212,7 +222,10 @@ export default class CardsConnectionEditing extends Plugin {
 
 		// Função para inserir elemento nas view de edição e dados, como definido na documentação
 		function insertViewElement(data, conversionApi, viewElement) {
-			conversionApi.consumable.consume(data.item, "insert");
+			conversionApi.consumable.consume(
+				data.item,
+				"insert:cardconnection"
+			);
 
 			conversionApi.mapper.bindElements(data.item, viewElement);
 
