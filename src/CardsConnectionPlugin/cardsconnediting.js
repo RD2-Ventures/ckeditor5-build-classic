@@ -146,6 +146,8 @@ export default class CardsConnectionEditing extends Plugin {
 			const cardtitle = modelItem.getAttribute("cardtitle");
 			const cardlink = modelItem.getAttribute("cardlink");
 
+			console.log(cardlink);
+
 			// Procura o card mencionado na lista de cards da configuração
 			const card = config
 				.get("cardconnections.cardList")
