@@ -100,15 +100,12 @@ export default class CardsConnectionEditing extends Plugin {
 				return;
 
 			// Marcamos que já tratamos o elemento <a> que estamos explorando atualmente
-			// conversionApi.consumable.consume(viewAnchor, { name: true });
-			conversionApi.consumable.consume(viewAnchor, {
-				// attributes: ["name", "cardid", "cardtitle", "cardlink"],
-				attributes: ["name"],
-				classes: ["cardconnection"],
-			});
+			conversionApi.consumable.consume(viewAnchor, { name: true });
 
 			// Atualizamos o resultado da conversão
 			conversionApi.updateConversionResult(modelElement, data);
+
+			event.stop();
 		}
 
 		// Registro de conversões, elas serão chamadas sempre que uma conexão for inserida ao modelo
@@ -139,6 +136,8 @@ export default class CardsConnectionEditing extends Plugin {
 					pipeline
 				);
 				insertViewElement(data, conversionApi, viewElement);
+
+				event.stop();
 			};
 		}
 
