@@ -45,9 +45,11 @@ export default class CardsConnectionEditing extends Plugin {
 		const config = this.editor.config;
 
 		// Registro de conversão, ela será chamada sempre que uma tag a for encontrada durante a exploração da view de dados
-		conversion
-			.for("upcast")
-			.add((dispatcher) => dispatcher.on("element:a", upcastConverter));
+		conversion.for("upcast").add((dispatcher) =>
+			dispatcher.on("element:a", upcastConverter, {
+				priority: "high",
+			})
+		);
 
 		// Conversão das view de dados para o modelo do CkEditor
 		function upcastConverter(event, data, conversionApi) {
@@ -114,7 +116,8 @@ export default class CardsConnectionEditing extends Plugin {
 			.add((dispatcher) =>
 				dispatcher.on(
 					"insert:cardconnection",
-					downcastConverter("editing")
+					downcastConverter("editing"),
+					{ priority: "high" }
 				)
 			);
 
@@ -123,7 +126,8 @@ export default class CardsConnectionEditing extends Plugin {
 			.add((dispatcher) =>
 				dispatcher.on(
 					"insert:cardconnection",
-					downcastConverter("data")
+					downcastConverter("data"),
+					{ priority: "high" }
 				)
 			);
 
