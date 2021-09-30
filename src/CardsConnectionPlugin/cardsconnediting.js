@@ -148,15 +148,12 @@ export default class CardsConnectionEditing extends Plugin {
 		// Cria os elementos das views
 		function createViewElement(data, conversionApi, pipeline) {
 			const modelItem = data.item;
-			console.log("modelItem: ", modelItem);
 
 			// Pega os atributos da conexão no modelo do ckeditor
 			const carddeleted = modelItem.getAttribute("carddeleted");
 			const cardid = parseInt(modelItem.getAttribute("cardid"));
 			const cardtitle = modelItem.getAttribute("cardtitle");
 			const cardlink = modelItem.getAttribute("cardlink");
-
-			console.log("cardlink: ", cardlink);
 
 			// Procura o card mencionado na lista de cards da configuração
 			const foundCard = config
