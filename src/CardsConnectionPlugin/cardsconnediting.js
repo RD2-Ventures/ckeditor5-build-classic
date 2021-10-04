@@ -45,9 +45,11 @@ export default class CardsConnectionEditing extends Plugin {
 		const config = this.editor.config;
 
 		// Registro de conversão, ela será chamada sempre que uma tag a for encontrada durante a exploração da view de dados
-		conversion
-			.for("upcast")
-			.add((dispatcher) => dispatcher.on("element:a", upcastConverter));
+		conversion.for("upcast").add((dispatcher) =>
+			dispatcher.on("element:a", upcastConverter, {
+				priority: "high",
+			})
+		);
 
 		// Conversão das view de dados para o modelo do CkEditor
 		function upcastConverter(event, data, conversionApi) {
@@ -101,8 +103,11 @@ export default class CardsConnectionEditing extends Plugin {
 
 			// Marcamos que já tratamos o elemento <a> que estamos explorando atualmente
 			conversionApi.consumable.consume(viewAnchor, { name: true });
+
 			// Atualizamos o resultado da conversão
 			conversionApi.updateConversionResult(modelElement, data);
+
+			event.stop();
 		}
 
 		// Registro de conversões, elas serão chamadas sempre que uma conexão for inserida ao modelo
@@ -111,7 +116,8 @@ export default class CardsConnectionEditing extends Plugin {
 			.add((dispatcher) =>
 				dispatcher.on(
 					"insert:cardconnection",
-					downcastConverter("editing")
+					downcastConverter("editing"),
+					{ priority: "high" }
 				)
 			);
 
@@ -120,7 +126,8 @@ export default class CardsConnectionEditing extends Plugin {
 			.add((dispatcher) =>
 				dispatcher.on(
 					"insert:cardconnection",
-					downcastConverter("data")
+					downcastConverter("data"),
+					{ priority: "high" }
 				)
 			);
 
@@ -133,6 +140,8 @@ export default class CardsConnectionEditing extends Plugin {
 					pipeline
 				);
 				insertViewElement(data, conversionApi, viewElement);
+
+				event.stop();
 			};
 		}
 
@@ -147,7 +156,7 @@ export default class CardsConnectionEditing extends Plugin {
 			const cardlink = modelItem.getAttribute("cardlink");
 
 			// Procura o card mencionado na lista de cards da configuração
-			const card = config
+			const foundCard = config
 				.get("cardconnections.cardList")
 				.find((card) => card.id === cardid);
 
@@ -159,15 +168,19 @@ export default class CardsConnectionEditing extends Plugin {
 					{
 						class: "cardconnection",
 						cardid,
-						cardtitle: card !== undefined ? card.title : cardtitle,
-						href: card !== undefined ? card.link : cardlink,
+						cardtitle:
+							foundCard !== undefined
+								? foundCard.title
+								: cardtitle,
+						href:
+							foundCard !== undefined ? foundCard.link : cardlink,
 						target: "_blank",
 						rel: "noopener",
 					},
 					function (domElement) {
 						const innerText =
-							card !== undefined
-								? card.title
+							foundCard !== undefined
+								? foundCard.title
 								: pipeline === "editing"
 								? `🆕 ${cardtitle}`
 								: cardtitle;
@@ -209,7 +222,10 @@ export default class CardsConnectionEditing extends Plugin {
 
 		// Função para inserir elemento nas view de edição e dados, como definido na documentação
 		function insertViewElement(data, conversionApi, viewElement) {
-			conversionApi.consumable.consume(data.item, "insert");
+			conversionApi.consumable.consume(
+				data.item,
+				"insert:cardconnection"
+			);
 
 			conversionApi.mapper.bindElements(data.item, viewElement);
 
