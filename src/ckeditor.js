@@ -84,6 +84,7 @@ const plugins = [
 const config = {
 	toolbar: {
 		items: [
+			"htmlEmbed",
 			"heading",
 			"|",
 			"bold",
@@ -106,7 +107,6 @@ const config = {
 			"blockQuote",
 			"insertTable",
 			"mediaEmbed",
-			"htmlEmbed",
 			"undo",
 			"redo",
 		],
@@ -269,6 +269,7 @@ InlineEditor.defaultConfig = config;
 BalloonEditor.defaultConfig = {
 	...config,
 	toolbar: [
+		"htmlEmbed",
 		"heading",
 		"|",
 		"bold",
@@ -296,7 +297,6 @@ BalloonEditor.defaultConfig = {
 			"blockQuote",
 			"insertTable",
 			"mediaEmbed",
-			"htmlEmbed",
 			"|",
 			"undo",
 			"redo",
