@@ -41,7 +41,7 @@ import ParagraphButtonUI from "@ckeditor/ckeditor5-paragraph/src/paragraphbutton
 import HtmlEmbed from "@ckeditor/ckeditor5-html-embed/src/htmlembed";
 
 import CardsConnectionPlugin from "./CardsConnectionPlugin";
-// import IFramePlugin from "./IFramePlugin";
+import IFramePlugin from "./IFramePlugin";
 
 class InlineEditor extends InlineEditorBase {}
 class BalloonEditor extends BalloonEditorBase {}
@@ -77,15 +77,14 @@ const plugins = [
 	Mention,
 	HtmlEmbed,
 	CardsConnectionPlugin,
+	// IFramePlugin,
 ];
 
 const config = {
 	toolbar: {
 		items: [
-			"htmlEmbed",
+			"heading",
 			"|",
-			// "heading",
-			// "|",
 			"bold",
 			"italic",
 			"link",
@@ -268,8 +267,6 @@ InlineEditor.defaultConfig = config;
 BalloonEditor.defaultConfig = {
 	...config,
 	toolbar: [
-		"htmlEmbed",
-		"|",
 		"heading",
 		"|",
 		"bold",
@@ -285,6 +282,7 @@ BalloonEditor.defaultConfig = {
 	],
 	blockToolbar: {
 		items: [
+			"htmlEmbed",
 			"paragraph",
 			"heading1",
 			"heading2",
