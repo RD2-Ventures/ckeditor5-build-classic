@@ -38,6 +38,7 @@ import Mention from "@ckeditor/ckeditor5-mention/src/mention";
 import BlockToolbar from "@ckeditor/ckeditor5-ui/src/toolbar/block/blocktoolbar";
 import HeadingButtonsUI from "@ckeditor/ckeditor5-heading/src/headingbuttonsui";
 import ParagraphButtonUI from "@ckeditor/ckeditor5-paragraph/src/paragraphbuttonui";
+import HtmlEmbed from "@ckeditor/ckeditor5-html-embed/src/htmlembed";
 
 import CardsConnectionPlugin from "./CardsConnectionPlugin";
 import IFramePlugin from "./IFramePlugin";
@@ -74,6 +75,8 @@ const plugins = [
 	HorizontalLine,
 	AutoLink,
 	Mention,
+	HtmlEmbed,
+	// custom plugins
 	CardsConnectionPlugin,
 	IFramePlugin,
 ];
@@ -103,6 +106,7 @@ const config = {
 			"blockQuote",
 			"insertTable",
 			"mediaEmbed",
+			"htmlEmbed",
 			"undo",
 			"redo",
 		],
@@ -292,6 +296,7 @@ BalloonEditor.defaultConfig = {
 			"blockQuote",
 			"insertTable",
 			"mediaEmbed",
+			"htmlEmbed",
 			"|",
 			"undo",
 			"redo",
