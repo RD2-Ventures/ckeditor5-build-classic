@@ -41,7 +41,7 @@ import ParagraphButtonUI from "@ckeditor/ckeditor5-paragraph/src/paragraphbutton
 import HtmlEmbed from "@ckeditor/ckeditor5-html-embed/src/htmlembed";
 
 import CardsConnectionPlugin from "./CardsConnectionPlugin";
-import IFramePlugin from "./IFramePlugin";
+// import IFramePlugin from "./IFramePlugin";
 
 class InlineEditor extends InlineEditorBase {}
 class BalloonEditor extends BalloonEditorBase {}
@@ -76,9 +76,7 @@ const plugins = [
 	AutoLink,
 	Mention,
 	HtmlEmbed,
-	// custom plugins
 	CardsConnectionPlugin,
-	IFramePlugin,
 ];
 
 const config = {
