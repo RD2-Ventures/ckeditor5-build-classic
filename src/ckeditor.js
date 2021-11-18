@@ -104,7 +104,8 @@ const config = {
 			"imageUpload",
 			"blockQuote",
 			"insertTable",
-			"mediaEmbed",
+			"htmlEmbed",
+			// "mediaEmbed",
 			"undo",
 			"redo",
 		],
@@ -282,7 +283,6 @@ BalloonEditor.defaultConfig = {
 	],
 	blockToolbar: {
 		items: [
-			"htmlEmbed",
 			"paragraph",
 			"heading1",
 			"heading2",
@@ -294,7 +294,8 @@ BalloonEditor.defaultConfig = {
 			"imageUpload",
 			"blockQuote",
 			"insertTable",
-			"mediaEmbed",
+			// "mediaEmbed",
+			"htmlEmbed",
 			"|",
 			"undo",
 			"redo",
