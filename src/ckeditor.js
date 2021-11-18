@@ -83,8 +83,9 @@ const config = {
 	toolbar: {
 		items: [
 			"htmlEmbed",
-			"heading",
 			"|",
+			// "heading",
+			// "|",
 			"bold",
 			"italic",
 			"link",
@@ -268,6 +269,7 @@ BalloonEditor.defaultConfig = {
 	...config,
 	toolbar: [
 		"htmlEmbed",
+		"|",
 		"heading",
 		"|",
 		"bold",
